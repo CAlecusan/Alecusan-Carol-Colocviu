@@ -52,4 +52,27 @@ public class Main {
             System.out.println(judet.toString());
         }
     }
+    private static void Search(List<Judet> judetList,String search) {
+        List<Judet> searchList = new ArrayList<>();
+        try(Scanner sc = new Scanner(new File(search))) {
+            while(sc.hasNextLine()) {
+                String line = sc.nextLine();
+                String[] data = line.split(" ");
+                String codiso = data[0];
+                String name = data[1];
+                String region = data[2];
+                Integer nrLoc = Integer.valueOf(data[3]);
+                Integer surfaceArea = Integer.valueOf(data[4]);
+                for(Judet judet : judetList){
+                    if(judet.getCodIso().equals(codiso) || judet.getNume().equals(name)){
+                        searchList.add(judet);
+                    }
+                }
+            }
+
+
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
